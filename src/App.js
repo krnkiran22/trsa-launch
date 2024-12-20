@@ -2,22 +2,46 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-// Keyframes for curtain animation
-const openCurtain = keyframes`
+// Keyframes for smooth and realistic curtain animation
+const realisticLeftCurtain = keyframes`
   0% {
-    transform: translateX(0);
+    transform: translateX(0) skewX(0deg);
+  }
+  20% {
+    transform: translateX(-10%) skewX(-3deg);
+  }
+  40% {
+    transform: translateX(-30%) skewX(2deg);
+  }
+  60% {
+    transform: translateX(-60%) skewX(-1deg);
+  }
+  80% {
+    transform: translateX(-80%) skewX(1deg);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-100%) skewX(0deg);
   }
 `;
 
-const closeCurtain = keyframes`
+const realisticRightCurtain = keyframes`
   0% {
-    transform: translateX(0);
+    transform: translateX(0) skewX(0deg);
+  }
+  20% {
+    transform: translateX(10%) skewX(3deg);
+  }
+  40% {
+    transform: translateX(30%) skewX(-2deg);
+  }
+  60% {
+    transform: translateX(60%) skewX(1deg);
+  }
+  80% {
+    transform: translateX(80%) skewX(-1deg);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(100%) skewX(0deg);
   }
 `;
 
@@ -27,10 +51,12 @@ const CurtainLeft = styled.div`
   left: 0;
   width: 50%;
   height: 100%;
-  background:#bf0019; /* Semi-transparent red */
+  background: linear-gradient(90deg, #8b0000, #bf0019);
   z-index: 10;
   transform: translateX(0);
-  animation: ${(props) => (props.open ? openCurtain : "none")} 3s forwards ease-in-out;
+  animation: ${(props) => (props.open ? realisticLeftCurtain : "none")} 3s forwards ease-in-out;
+  box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.5);
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
 `;
 
 const CurtainRight = styled.div`
@@ -39,10 +65,12 @@ const CurtainRight = styled.div`
   right: 0;
   width: 50%;
   height: 100%;
-  background: #bf0019; /* Semi-transparent red */
+  background: linear-gradient(90deg, #bf0019, #8b0000);
   z-index: 10;
   transform: translateX(0);
-  animation: ${(props) => (props.open ? closeCurtain : "none")} 3s forwards ease-in-out;
+  animation: ${(props) => (props.open ? realisticRightCurtain : "none")} 3s forwards ease-in-out;
+  box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.5);
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
 `;
 
 const LaunchButton = styled.button`
